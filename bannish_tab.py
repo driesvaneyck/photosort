@@ -1,7 +1,6 @@
 from PyQt4 import QtCore, QtGui
 from Label import Label
 import os,sys
-import subprocess
 from linkedoutput import linked_output
 
 
