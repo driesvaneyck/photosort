@@ -8,6 +8,7 @@ class parent_tab():
         #Variables
         self.dbr = []
         self.counter = 1
+        self.location = ""
 
 
     #Methods: 

@@ -3,6 +3,8 @@ from Label import Label
 from lga import lga
 from parent_tab import parent_tab
 import os,sys
+from linkedoutput import linked_output
+
 
 
 class Screening_Tab(QtGui.QWidget,parent_tab):
@@ -10,7 +12,7 @@ class Screening_Tab(QtGui.QWidget,parent_tab):
         super(Screening_Tab, self).__init__(parent= parent)
 
         # Variables
-        self.change_location("")
+        self.container = linked_output("")
 
         # Widgets
         self.buttons = [
@@ -90,18 +92,12 @@ class Screening_Tab(QtGui.QWidget,parent_tab):
             return False
 
     def print_result(self):
-        # self.buttons[0].setText('Klaar met')
-        # self.buttons[1].setText('sorteren')
+        self.container.unlinked_raw()
         self.set_image(0, os.path.join(os.path.dirname(sys.argv[0]),"img/done.png"))
         if self.dbr !=None:
-            string1 = "%s" % (self.location)
-            # self.parent().widget(0).output.append("mkdir %sselectie/"%(string1.replace(" ","\ ")))#print code in output window
-            dir_to_make = "%sverban/"%(string1.replace(" ","\ ")) #execute code
-            if not os.path.exists(dir_to_make): #execute code
-                os.makedirs(dir_to_make) #execute code
+            self.container.check_or_make("verban")
             counter = 0
             for x in self.dbr:
                 if x != None and counter <= self.counter:
-                    # self.parent().widget(0).output.append("mv %s%s %sselectie/%s"%(string1.replace(" ","\ "),x,string1.replace(" ","\ "),x)) #print code in output window
-                    os.rename("%s%s"%(string1.replace(" ","\ "),x),"%sverban/%s"%(string1.replace(" ","\ "),x)) #execute code
+                    self.container.place_in_submap(x,"verban")
             self.dbr=None #this line makes sure your output only appears once

@@ -3,6 +3,8 @@ from Label import Label
 from lga import lga
 from parent_tab import parent_tab
 import os,sys
+from linkedoutput import linked_output
+
 
 
 class Sort_Tab(QtGui.QWidget,parent_tab):
@@ -10,8 +12,8 @@ class Sort_Tab(QtGui.QWidget,parent_tab):
         super(Sort_Tab, self).__init__(parent= parent)
 
         # Variables
-        self.change_location("")
         self.stamvader = lga(None)
+        self.container = linked_output("")
         # self.counter = 0 # =prune limit in this class, currently deactivated function
 
         # Widgets
@@ -121,12 +123,11 @@ class Sort_Tab(QtGui.QWidget,parent_tab):
         self.reset_lga_common()
 
     def print_result(self):
+        self.container.unlinked_raw()
         teller = len(self.stamvader.get_array())-1
-        string1 = "%s" % (self.location)
         while teller >= 0:
             anwsr = self.dbr[self.stamvader.get_array()[teller]-1]
-            # self.parent().widget(0).output.append("mv %s%s %s%s_%s"%(string1.replace(" ","\ "),anwsr,string1.replace(" ","\ "),len(self.stamvader.get_array()) - teller,anwsr)) #print code in output window
-            os.rename("%s%s"%(string1.replace(" ","\ "),anwsr),"%s%s_%s"%(string1.replace(" ","\ "),len(self.stamvader.get_array()) - teller,anwsr)) #execute code
+            self.container.prefix(anwsr, len(self.stamvader.get_array()) - teller)
             teller = teller-1
         self.set_image(0, os.path.join(os.path.dirname(sys.argv[0]),"img/done.png"))
         self.set_image(1, os.path.join(os.path.dirname(sys.argv[0]),"img/done.png"))

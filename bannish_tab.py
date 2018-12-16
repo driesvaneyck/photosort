@@ -2,6 +2,8 @@ from PyQt4 import QtCore, QtGui
 from Label import Label
 import os,sys
 import subprocess
+from linkedoutput import linked_output
+
 
 class Bannish_Tab(QtGui.QWidget):
     def __init__(self,parent):
@@ -11,6 +13,7 @@ class Bannish_Tab(QtGui.QWidget):
         self.file_list = []
         self.list_order = []
         self.act_compare = 1
+        self.container = linked_output("")
 
         # Widgets
         self.labels = [
@@ -98,20 +101,17 @@ class Bannish_Tab(QtGui.QWidget):
                self.labels[1].update()
 
     def verban(self):
+        self.container.unlinked_raw()
         self.output.setText("")
-        self.check_bannish()
+        # self.check_bannish()
+        self.container.check_or_make("verban")
         i=0
         while i< len(self.list_order)-2:
-            location = os.path.dirname(self.file_list[self.list_order[i]])
             file = os.path.basename(self.file_list[self.list_order[i]])
-            os.rename("%s/%s"%(location,file), "%s/verban/%s"%(location,file))
+            self.container.place_in_submap(file,"verban")
             i+=1
         self.restart
 
-    def check_bannish(self):
-        directory = os.path.dirname(str(self.file_list[0]))+"/verban"
-        if not os.path.exists(directory):
-            os.makedirs(directory)
 
     def restart(self):
         self.file_list = []

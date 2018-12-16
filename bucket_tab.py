@@ -2,13 +2,14 @@ from PyQt4 import QtCore, QtGui
 from Label import Label
 import os, sys
 from parent_tab import parent_tab
+from linkedoutput import linked_output
 
 class bucket_tab(QtGui.QWidget,parent_tab):
     def __init__(self,parent):
         super(bucket_tab, self).__init__(parent= parent)
 
         # Variables
-        self.change_location("")
+        self.container = linked_output("")
 
         # Widgets
         self.labels = [
@@ -104,33 +105,19 @@ class bucket_tab(QtGui.QWidget,parent_tab):
 
     def print_result(self):
         self.set_image(0, os.path.join(os.path.dirname(sys.argv[0]),"img/done.png"))
+        self.container.unlinked_raw()
         if self.memarrays != None:
             counter_place = 0
-            string1 = "%s" % (self.location)
-            # self.parent().widget(0).output.append("mkdir %sbucket_1/"%(string1.replace(" ","\ "))) #print code in output window
-            # self.parent().widget(0).output.append("mkdir %sbucket_2/"%(string1.replace(" ","\ "))) #print code in output window
-            # self.parent().widget(0).output.append("mkdir %sbucket_3/"%(string1.replace(" ","\ "))) #print code in output window
-            # self.parent().widget(0).output.append("mkdir %sbucket_4/"%(string1.replace(" ","\ "))) #print code in output window
-            # self.parent().widget(0).output.append("mkdir %sbucket_5/"%(string1.replace(" ","\ "))) #print code in output window
-            # self.parent().widget(0).output.append("mkdir %sbucket_6/"%(string1.replace(" ","\ "))) #print code in output window
-            if not os.path.exists("%sbucket_1/"%(string1.replace(" ","\ "))):
-                os.makedirs("%sbucket_1/"%(string1.replace(" ","\ "))) #execute code
-            if not os.path.exists("%sbucket_2/"%(string1.replace(" ","\ "))): #execute code
-                os.makedirs("%sbucket_2/"%(string1.replace(" ","\ "))) #execute code
-            if not os.path.exists("%sbucket_3/"%(string1.replace(" ","\ "))):
-                os.makedirs("%sbucket_3/"%(string1.replace(" ","\ "))) #execute code
-            if not os.path.exists("%sbucket_4/"%(string1.replace(" ","\ "))): #execute code
-                os.makedirs("%sbucket_4/"%(string1.replace(" ","\ "))) #execute code
-            if not os.path.exists("%sbucket_5/"%(string1.replace(" ","\ "))):
-                os.makedirs("%sbucket_5/"%(string1.replace(" ","\ "))) #execute code
-            if not os.path.exists("%sbucket_6/"%(string1.replace(" ","\ "))): #execute code
-                os.makedirs("%sbucket_6/"%(string1.replace(" ","\ "))) #execute code
-
+            self.container.check_or_make("bucket_1")
+            self.container.check_or_make("bucket_2")
+            self.container.check_or_make("bucket_3")
+            self.container.check_or_make("bucket_4")
+            self.container.check_or_make("bucket_5")
+            self.container.check_or_make("bucket_6")
             for subplots in self.memarrays:
                 counter_place = counter_place + 1
                 for item in subplots:
                     anwsr = self.dbr[item-1]
-                    # self.parent().widget(0).output.append("mv %s%s %sbucket_%s/%s"%(string1.replace(" ","\ "),anwsr,string1.replace(" ","\ "),counter_place,anwsr))
-                    os.rename("%s%s"%(string1.replace(" ","\ "),anwsr),"%sbucket_%s/%s"%(string1.replace(" ","\ "),counter_place,anwsr)) #execute code
-
+                    self.container.place_in_submap(anwsr,"bucket_%s"%(counter_place,))
             self.memarrays=None #this line makes sure your output only appears once
+
