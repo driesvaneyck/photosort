@@ -91,6 +91,7 @@ class bucket_tab(QtGui.QWidget,parent_tab):
             self.set_new_word(nr,self.counter)
             self.memarrays[nr-1].append(self.counter)
             self.counter = self.counter + 1
+        if self.DB_size(self.counter):
             self.set_new_word(0,self.counter)
         else:
             #printresult
