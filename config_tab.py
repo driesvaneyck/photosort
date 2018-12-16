@@ -71,8 +71,6 @@ class Config_Tab(QtGui.QWidget):
 
 
     def keyPressEvent(self, event):
-        if event.key() == QtCore.Qt.Key_0:
-            self.copy_rank(self.location)
         if event.key() == QtCore.Qt.Key_1:
             self.name_security(self.location,True)
         if event.key() == QtCore.Qt.Key_2:
@@ -127,6 +125,7 @@ class Config_Tab(QtGui.QWidget):
         self.parent().widget(screening).set_new_word(0,1)
 
         self.parent().widget(bucket).set_counter(1)
+        self.parent().widget(bucket).reset_bucket()
         self.parent().widget(bucket).change_location(filename2)
         # self.parent().widget(bucket).OT = linked_output(filename2)
         self.parent().widget(bucket).set_dbr(dbr)
@@ -147,44 +146,6 @@ class Config_Tab(QtGui.QWidget):
         self.output.append("Loaded %s pictures"%(len(abc)))
         return abc
 
-    def copy_rank(self,location):
-        #if this location has a subfolder named RAW or RAF mimic the naming scheme of this folder onto that one
-        baselocation = None
-        ext = None
-        if os.path.exists(os.path.join(location,"RAF")):
-            baselocation = os.path.join(location,"RAF")
-            ext = "RAF"
-        elif os.path.exists(os.path.join(location,"RAW")):
-            baselocation = os.path.join(location,"RAW")
-            ext = "RAW"
-        if baselocation != None:
-            dbr = self.insert_photo_list_dbr(location)
-            for x in dbr:
-                stripname = os.path.splitext(x)[0]
-                print stripname
-                stripname = stripname+"."+ext
-                print stripname
-                counter = 0
-                if "_" in stripname:
-                    while stripname[counter] != "_":
-                        counter = counter + 1
-                    strippername = stripname[counter+1:]
-                    strippername = os.path.join(baselocation,strippername)
-                else:
-                    strippername = os.path.join(baselocation,stripname)
-                if os.path.exists(strippername):
-                    stripname = os.path.join(baselocation, stripname)
-                    os.rename(strippername,stripname)
-
-    def name_security(self, location, switch ):
-        if switch:
-            onlyfiles = [f for f in os.listdir(location) if os.path.isfile(os.path.join(location, f))]
-            for file in onlyfiles:
-                os.rename(os.path.join(location,file),os.path.join(location,file.replace("_","---")))
-        else:
-            onlyfiles = [f for f in os.listdir(location) if os.path.isfile(os.path.join(location, f))]
-            for file in onlyfiles:
-                os.rename(os.path.join(location,file),os.path.join(location,file.replace("---","_")))
 
 
 

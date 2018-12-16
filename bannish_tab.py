@@ -65,7 +65,6 @@ class Bannish_Tab(QtGui.QWidget):
     def read_out_list(self):
         self.restart()
         self.file_list = str (self.output.toPlainText().replace("file://","")).replace("%20"," ").split("\n")
-        print self.file_list
         i=0
         for item in self.file_list:
             self.list_order.append(i)
@@ -105,11 +104,17 @@ class Bannish_Tab(QtGui.QWidget):
         self.output.setText("")
         # self.check_bannish()
         self.container.check_or_make("verban")
+        switch = False
+        if self.container.is_slave(self.file_list[0]):
+            self.container.switch_SM()
+            switch = True
         i=0
         while i< len(self.list_order)-2:
             file = os.path.basename(self.file_list[self.list_order[i]])
             self.container.place_in_submap(file,"verban")
             i+=1
+        if switch:
+            self.container.switch_SM()
         self.restart
 
 

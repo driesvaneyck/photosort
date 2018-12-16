@@ -6,7 +6,6 @@ class linked_output(object):
         self.__dict__=self.__shared_state
         self.bloc = []
         self.ext=[]
-        print args[0]
         if not self.is_empty():
             self.bloc.append(args[0])
             if len(args) > 1:
@@ -46,6 +45,7 @@ class linked_output(object):
             result = os.path.join(self.bloc[1],target,self.ext_switch(file))
             os.rename(original,result)
 
+
     def prefix(self,name,prefix):
         original = os.path.join(self.bloc[0],name)
         result = os.path.join(self.bloc[0],str(prefix)+"_"+name)
@@ -77,9 +77,7 @@ class linked_output(object):
         return new_name
 
     def unlinked_raw(self):
-        print "unlinked"
         if len(self.bloc) == 1 and os.path.exists(os.path.join(self.bloc[0],"tmp_tiff")):
-            print "linked"
             self.bloc.append(os.path.join(self.bloc[0],"tmp_tiff"))
             self.ext.append(".tiff")
 
@@ -87,9 +85,15 @@ class linked_output(object):
         master = self.bloc[0]
         self.bloc[0] = self.bloc[1]
         self.bloc[1] = master
+        master_ext = self.ext[0]
+        self.ext[0] = self.ext[1]
+        self.ext[1] = master_ext
 
     def is_slave(self,file):
-        if os.path.basename(file) == self.get_bloc(1):
-            return True
+        if len(self.bloc) >1:
+            if os.path.splitext(file)[1] == self.get_ext(1):
+                return True
+            else:
+                return False
         else:
             return False

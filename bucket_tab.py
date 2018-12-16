@@ -92,7 +92,6 @@ class bucket_tab(QtGui.QWidget,parent_tab):
             self.memarrays[nr-1].append(self.counter)
             self.counter = self.counter + 1
             self.set_new_word(0,self.counter)
-            print self.counter
         else:
             #printresult
             self.print_result()
@@ -121,3 +120,18 @@ class bucket_tab(QtGui.QWidget,parent_tab):
                     self.container.place_in_submap(anwsr,"bucket_%s"%(counter_place,))
             self.memarrays=None #this line makes sure your output only appears once
 
+    def reset_bucket(self):
+        self.labels[1].setPixmap(os.path.join(os.path.dirname(sys.argv[0]),"img/1.png"))
+        self.labels[2].setPixmap(os.path.join(os.path.dirname(sys.argv[0]),"img/2.png"))
+        self.labels[3].setPixmap(os.path.join(os.path.dirname(sys.argv[0]),"img/3.png"))
+        self.labels[4].setPixmap(os.path.join(os.path.dirname(sys.argv[0]),"img/4.png"))
+        self.labels[5].setPixmap(os.path.join(os.path.dirname(sys.argv[0]),"img/5.png"))
+        self.labels[6].setPixmap(os.path.join(os.path.dirname(sys.argv[0]),"img/6.png"))
+        self.memarrays = [
+            list(),
+            list(),
+            list(),
+            list(),
+            list(),
+            list()
+        ]
