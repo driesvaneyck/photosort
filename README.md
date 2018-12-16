@@ -4,21 +4,21 @@ photo collection screening tool in python
 #Depends on packages:
 -------------------------
 
-PyQT4
-rawpy
-imageio
+PyQT4 \n
+rawpy \n
+imageio \n
 
-#Installation notes:
+Installation notes:
 -------------------------
 
 
-#Startup
+Startup
 -------------------------
 
 Run command:
 >$ python photosort_main.py
 
 
-#Usermanual:
+Usermanual:
 -------------------------
 usermanual.pdf
