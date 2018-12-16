@@ -12,10 +12,10 @@ imageio
 Installation notes:
 -------------------------
 
->$ sudo apt install python-pip
->$ sudo apt-get install python-qt4
+>$ sudo apt install python-pip  
+>$ sudo apt-get install python-qt4  
 
-Install libraw version 19.1 (the default version: 19.0 does not work on linux!):
+Install libraw version 19.1 (the default version: 19.0 does not work on linux!):  
 https://www.libraw.org/
 
 Install rawpy from source on Linux/macOS:
