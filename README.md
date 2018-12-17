@@ -52,6 +52,8 @@ Different possible operations:.
 - Screening. Simple pass fail filter for all photo's. Use this to trim collection of the worst photo's. The photo's you didn't select are moved to a subdirectory.  
 - Bucket:  you van use this option to sort pictures in up to six categories.  
 - Duplicates(bannish): use this to compare simmilar photo's and only keep the best one. The photo's you didn't select are moved to a subdirectory. Duplicates works via drag and drop. Drag and drop the similar photo's from your master of slave folder into the text field above the 'sorteer' (sort) button. Press that button after. Dropping the files.  
+
+
 After each completed operation (when the doen screen appears) reload the image array by pressing the 'selectFile' button in the config tab. The duplicates(bannish) tab is the exception to this rule.
 
 The sort, duplicates and screenng operations are operated by using numpad-4 and numpad-6. The bucket tab is operated by using the numpad-7, -8, -9, -4, -5, -6 keys to sort the files into buckegs 1,2,3,4,5,6 respectivly. Each opperation can be terminated prematurely with partial results by pressing numpad-0.
