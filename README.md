@@ -42,3 +42,9 @@ Run command:
 Usermanual:
 -------------------------
 usermanual.pdf
+
+In the config tab select the folder with your images by pressing the master button.
+With th slave button you can select a folder with raw or png files corresponding to the files in your master folder. All operations executed on files in the master folders will be mirrored on the files in the slave folder. Selecting a slave folder is optional.  
+When you selected a master folder (and optionally a slave folder) press the select-files button. This will load the images.  
+Different possible operations:. 
+Sort: repeatedly select the best of two pictures (quicksort) untill you ordered all pictures. Faster if the amount of photo's you have to go trough is smaller. Recommended to uwe this operation last.  
