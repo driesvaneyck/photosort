@@ -40,7 +40,7 @@ class linked_output(object):
         original = os.path.join(self.bloc[0],file)
         result = os.path.join(self.bloc[0],target,file)
         os.rename(original,result)
-        if self.is_linked():
+        if self.is_linked() and os.path.exists(os.path.join(self.bloc[1],self.ext_switch(file))):
             original = os.path.join(self.bloc[1],self.ext_switch(file))
             result = os.path.join(self.bloc[1],target,self.ext_switch(file))
             os.rename(original,result)
@@ -50,7 +50,7 @@ class linked_output(object):
         original = os.path.join(self.bloc[0],name)
         result = os.path.join(self.bloc[0],str(prefix)+"_"+name)
         os.rename(original,result)
-        if self.is_linked():
+        if self.is_linked() and os.path.exists(os.path.join(self.bloc[1],self.ext_switch(name))):
             original = os.path.join(self.bloc[1],self.ext_switch(name))
             result = os.path.join(self.bloc[1],str(prefix)+"_"+self.ext_switch(name))
             os.rename(original,result)
