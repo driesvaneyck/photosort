@@ -74,6 +74,8 @@ class linked_output(object):
             new_name = basename + self.get_ext(1)
         elif ori_ext == self.get_ext(1):
             new_name = basename + self.get_ext(0)
+        else:
+            new_name = basename
         return new_name
 
     def unlinked_raw(self):
